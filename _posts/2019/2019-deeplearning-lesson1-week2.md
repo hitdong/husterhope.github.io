@@ -48,29 +48,3 @@ $J\left( w,b \right)=\frac{1}{m}\sum\limits_{i=1}^{m}{L\left( {{{\hat{y}}}^{(i)}
 迭代就是不断重复做如图的公式:
 $:=$表示更新参数,
 $a $ 表示学习率（learning rate），用来控制步长（step），即向下走一步的长度$\frac{dJ(w)}{dw}$ 就是函数$J(w)$对$w$ 求导（derivative），在代码中我们会使用$dw$表示这个结果
-### 2.9 逻辑回归中的梯度下降(Logistic Regression Gradient Descent)
-![](/media/pic2019/deeplearning_Andrew/lesson1/lr_gd.jpg)
-运用链式法则求导
-$\frac{dL(a,y)}{da}=\frac{dL}{da}=-y/a+(1-y)/(1-a)$
-$\sigma(z)$是sigmoid函数，$a=\sigma(z)=\frac{1}{1+e^{-z}}$
-$\frac{da}{dz}=\frac{e^{-z}}{(1+e^{-z})^2}=\frac{1 + e^{-z} - 1}{(1+e^{-z})^2}=\frac{1}{1 + e^{-z}}(1 - \frac{1}{1+e^{-z}})=\sigma(z)(1-\sigma(z))=a\cdot(1-a)$
-
-
-$\frac{dL(a, y)}{dz}=\frac{dL}{dz}=\left(\frac{dL}{da}\right)\cdot\left(\frac{da}{dz}\right)=(-\frac{y}{a}+\frac{1-y}{1-a})\cdot a(1-a) = a - y$
-现在计算$w$和$b$变化对代价函数$L$的影响
-$d{w}_{1}=\frac{1}{m}\sum\limits_{i}^{m}{x_{1}^{(i)}}({{a}^{i}} - {{y}^{(i)}})$
-$d{w}_{2}=\frac{1}{m}\sum\limits_{i}^{m}{x_{2}^{(i)}}({{a}^{i}} - {{y}^{(i)}})$
-$db=\frac{1}{m}\sum\limits_{i}^{m}{{a}^{i}} - {{y}^{(i)}}$
-视频中，
-$d{{w}_{1}}$ 表示$\frac{\partial L}{\partial {{w}_{1}}}={{x}_{1}}\cdot dz$， 
-$d{{w}_{\text{2}}}$ 表示$\frac{\partial L}{\partial {{w}_{2}}}={{x}_{2}}\cdot dz$，
-$db=dz$。
-因此，关于单个样本的梯度下降算法，你所需要做的就是如下的事情：
-使用公式$dz=(a-y)$计算$dz$，
-使用$d{{w}_{1}}={{x}_{1}}\cdot dz$ 计算$d{{w}_{1}}$， $d{{w}_{2}}={{x}_{2}}\cdot dz$计算$d{{w}_{2}}$，
-$db=dz$ 来计算$db$，
-然后:
-更新${{w}_{1}}={{w}_{1}}-a d{{w}_{1}}$，
-更新${{w}_{2}}={{w}_{2}}-a d{{w}_{2}}$，
-更新$b=b-\alpha db$。
-这就是关于单个样本实例的梯度下降算法中参数更新一次的步骤
